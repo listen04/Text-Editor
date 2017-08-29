@@ -1,0 +1,6 @@
+200 background R
+200 background G
+200 background B
+000 foreground R
+000 foreground G
+000 foreground B

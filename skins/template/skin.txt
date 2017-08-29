@@ -1,0 +1,7 @@
+backgroundRed
+backgroundBlue
+backgroundGreen
+foregroundRed
+foregroundBlue
+foregroundGreen
+
