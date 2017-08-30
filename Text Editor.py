@@ -13,6 +13,8 @@ def skin():
     foregroundColour = "#%02x%02x%02x" % (skinColours[3],
                                           skinColours[4],
                                           skinColours[5])
+    #formats the user's RGB choice of colour to something
+    #that tkinter understands
     skinFont = open(r"skins\\" + skin + r"\\skinfont.txt").read().split("\n")
 
     if len(skinFont) == 2:
