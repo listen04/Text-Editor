@@ -1,25 +1,28 @@
 from tkinter import *
-import os.path
 import os
 
-skinColours = []
-skin = open("skins\\currentskin.txt", "r").read()
-skinDir = (r"skins\\" + skin + r"\\skin.txt")
-for line in open(skinDir):
-    skinColours.append(int(line[:3]))
-backgroundColour = "#%02x%02x%02x" % (skinColours[0],
-                                      skinColours[1],
-                                      skinColours[2])
-foregroundColour = "#%02x%02x%02x" % (skinColours[3],
-                                      skinColours[4],
-                                      skinColours[5])
+def skin():
+    skinColours = []
+    skin = open("skins\\currentskin.txt", "r").read()
+    skinDir = (r"skins\\" + skin + r"\\skin.txt")
+    for line in open(skinDir):
+        skinColours.append(int(line[:3]))
+    backgroundColour = "#%02x%02x%02x" % (skinColours[0],
+                                          skinColours[1],
+                                          skinColours[2])
+    foregroundColour = "#%02x%02x%02x" % (skinColours[3],
+                                          skinColours[4],
+                                          skinColours[5])
+    skinFont = open(r"skins\\" + skin + r"\\skinfont.txt").read().split("\n")
 
-skinFont = open(r"skins\\" + skin + r"\\skinfont.txt").read().split("\n")
-if len(skinFont) == 2:
-    skinFont.append("")
-elif len(skinFont) < 1:
-    skinFont.append("", "", "")
-    print(skinFont)
+    if len(skinFont) == 2:
+        skinFont.append("")
+    elif len(skinFont) < 1:
+        skinFont.append("", "", "")
+    
+    return {"bgColour":backgroundColour,
+            "fgColour":foregroundColour,
+            "skinFont":skinFont}
 
 def saveFile():
     savingFile = open(str(saveBoxName.get("1.0", 'end-1c')), "w")
@@ -71,6 +74,8 @@ def countWords(event):
     wordCount = ("Words: " + str(wordCount) + ", Characters: " + str(charCount))
     wordCountText.set(str(wordCount))
 
+skinInfo = skin()
+
 if __name__ == "__main__":
 
     master = Tk()
@@ -96,8 +101,8 @@ if __name__ == "__main__":
     textFrame.pack(side="top", expand=True, fill="both")
 
     saveBoxName = Text(topFrame, width=20, height=1,
-                       background=backgroundColour,
-                       foreground=foregroundColour)
+                       background=skinInfo["bgColour"],
+                       foreground=skinInfo["fgColour"])
     saveBoxName.insert(END, "enterfilename.txt")
     saveBoxName.grid(row=0, column=0)
 
@@ -107,13 +112,13 @@ if __name__ == "__main__":
     wordCountLabel = Label(topFrame, textvariable=wordCountText)
     wordCountLabel.grid(row=0, column=1)
     
-    scrollTextBox = Scrollbar(textFrame, background=backgroundColour)
+    scrollTextBox = Scrollbar(textFrame)
     scrollTextBox.pack(side=RIGHT, fill=Y)
 
-    textBox = Text(textFrame, background=backgroundColour,
-                   foreground=foregroundColour,
+    textBox = Text(textFrame, background=skinInfo["bgColour"],
+                   foreground=skinInfo["fgColour"],
                    yscrollcommand=scrollTextBox.set,
-                   font=skinFont)
+                   font=skinInfo["skinFont"])
     master.grid_columnconfigure(0, weight=1)
     textBox.pack(expand=True, fill=BOTH)
     scrollTextBox.config(command=textBox.yview)
