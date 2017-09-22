@@ -1,0 +1,10 @@
+Ideas for da project:
+
+- have like a command bar, which you could:
+ - type a skin name into to change the skin
+ - act as a dictionary (type in word, have the program add the definition to whereever the cursor is in the text box)
+ - typed commands for open, save and close
+ - run programs (type in Minecraft to open minecraft etc), could be used for opening IDLE to test something or opening a program to record a tutorial
+ - open websites (type in YouTube to get YouTube open in default browser etc)
+ - send messages to friends (type [/message name message] which would send a message to a friend
+ - receive messages (type [/message get] which would print all messages to wherever the cursor is in the document

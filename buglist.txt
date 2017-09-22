@@ -1,0 +1,1 @@
+skin selection always selects template instead of the choice
